@@ -2,15 +2,13 @@ import { Button, TextField, Box } from '@mui/material'
 import React, { ChangeEvent, useContext, useState } from 'react'
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import { padding } from '@mui/system';
-import { EntriesProvider } from '../../context/entries';
 import { EntriesContext } from '../../context/entries/EntriesContext';
+import { UIContext } from '../../context/ui';
 
 export const NewEntry = () => {
 
-    const { addNewEntry } = useContext(EntriesContext)
-
-    const [isAdding, setIsAdding] = useState(false);
+    const { addNewEntry } = useContext(EntriesContext);
+    const { isAddingEntry, isAdding } = useContext(UIContext);
 
     const [inputValue, setInputValue] = useState('');
     const [touched, setTouched] = useState(false);
@@ -24,8 +22,8 @@ export const NewEntry = () => {
             setTouched(true);
         } else{
             addNewEntry(inputValue);
-            setIsAdding(false)
             setInputValue('');
+            isAdding(false);
             setTouched(false);
         }
     }
@@ -34,7 +32,7 @@ export const NewEntry = () => {
         <Box sx={{ marginBottom: 2, paddingX: 1 }}>
 
             {
-                isAdding ? (
+                isAddingEntry ? (
                     <>
                         <TextField
                             fullWidth
@@ -51,7 +49,7 @@ export const NewEntry = () => {
                         />
 
                         <Box display='flex' justifyContent='space-evenly'>
-                            <Button variant='text' onClick={() => { setIsAdding(false); setTouched(false), setInputValue('')} }>
+                            <Button variant='text' onClick={() => { isAdding(false); setTouched(false), setInputValue('')} }>
                                 Cancel
                             </Button>
 
@@ -66,7 +64,7 @@ export const NewEntry = () => {
                         startIcon={<AddCircleOutlineOutlinedIcon />}
                         fullWidth
                         variant='outlined'
-                        onClick={() => setIsAdding(true)}
+                        onClick={() => isAdding(true)}
                     >
                         Add a task
                     </Button>
