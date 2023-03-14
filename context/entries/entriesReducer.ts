@@ -10,7 +10,7 @@ export const entriesReducer = ( state: EntriesState, action: EntriesType ): Entr
         case '[Entry] Add-Entry':
             return {
                 ...state,
-                
+                entries: [ ...state.entries, action.payload ]
             }
     
         default:
