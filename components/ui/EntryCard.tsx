@@ -1,6 +1,7 @@
 import { Card, CardActionArea, CardActions, CardContent, Typography } from '@mui/material'
-import React, { DragEvent, FC } from 'react'
+import React, { DragEvent, FC, useContext } from 'react'
 import { Entry } from '../../interfaces';
+import { UIContext } from '../../context/ui';
 
 interface Props {
     entry: Entry;
@@ -8,14 +9,17 @@ interface Props {
 
 export const EntryCard:FC<Props>= ({ entry }) => {
 
+    const { taskDragging } = useContext(UIContext)
+
     const onDragStart = ( event: DragEvent<HTMLDivElement>) => {
         event.dataTransfer.setData('text', entry._id)
-
+        taskDragging(true);
         //todo: modify the state to identify that Im doing frag
     }
 
     const onDragEnd = () => {
         //todo cancelar on drag
+        taskDragging(false);
     }
 
     return (
