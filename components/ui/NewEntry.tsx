@@ -7,6 +7,7 @@ import { UIContext } from '../../context/ui';
 
 export const NewEntry = () => {
 
+
     const { addNewEntry } = useContext(EntriesContext);
     const { isAddingEntry, isAdding } = useContext(UIContext);
 
@@ -20,12 +21,18 @@ export const NewEntry = () => {
     const onSave = () => {
         if (inputValue.length <= 0) {
             setTouched(true);
-        } else{
+        } else {
             addNewEntry(inputValue);
             setInputValue('');
             isAdding(false);
             setTouched(false);
         }
+    }
+
+    const cancelAction = () => {
+        setTouched(false);
+        setInputValue('');
+        isAdding(false);
     }
 
     return (
@@ -41,34 +48,34 @@ export const NewEntry = () => {
                             autoFocus
                             multiline
                             label='New Entry'
-                            helperText={ inputValue.length <= 0 && touched && 'New Entry' }
-                            error={ inputValue.length <= 0 && touched }
-                            value={ inputValue }
-                            onChange={ onTextFieldChanged}
-                            onBlur={ () => setTouched(true) }
+                            helperText={inputValue.length <= 0 && touched && 'New Entry'}
+                            error={inputValue.length <= 0 && touched}
+                            value={inputValue}
+                            onChange={onTextFieldChanged}
+                            onBlur={() => setTouched(true)}
                         />
 
                         <Box display='flex' justifyContent='space-evenly'>
-                            <Button variant='text' onClick={() => { isAdding(false); setTouched(false), setInputValue('')} }>
+                            <Button variant='text' onClick={() => { cancelAction() }}>
                                 Cancel
                             </Button>
 
-                            <Button onClick={ onSave } variant='outlined' color='secondary' endIcon={<SaveOutlinedIcon />}>
+                            <Button onClick={onSave} variant='outlined' color='secondary' endIcon={<SaveOutlinedIcon />}>
                                 Save
                             </Button>
                         </Box>
                     </>
                 )
-                : (
-                    <Button
-                        startIcon={<AddCircleOutlineOutlinedIcon />}
-                        fullWidth
-                        variant='outlined'
-                        onClick={() => isAdding(true)}
-                    >
-                        Add a task
-                    </Button>
-                )
+                    : (
+                        <Button
+                            startIcon={<AddCircleOutlineOutlinedIcon />}
+                            fullWidth
+                            variant='outlined'
+                            onClick={() => isAdding(true)}
+                        >
+                            Add a task
+                        </Button>
+                    )
             }
 
         </Box>
