@@ -8,29 +8,7 @@ export interface EntriesState {
 }
 
 const Entries_INITIAL_STATE: EntriesState = {
-    entries: [
-        {
-            _id: uuidv4(),
-            description: 'Pending: Lorem ipsum dolor sit amet consectetur',
-            status: 'pending',
-            createdAt: Date.now(),
-            
-        },
-        {
-            _id: uuidv4(),
-            description: 'In-Progress: Adipisicing elit. Eveniet maiores eius eos',
-            status: 'in-progress',
-            createdAt: Date.now() - 1000000,
-            
-        },
-        {
-            _id: uuidv4(),
-            description: 'Eveniet maiores eius eos. Eligendi cupiditate dolorem modi quo reiciendis vel maiores tempora architecto odio non',
-            status: 'finished',
-            createdAt: Date.now() - 100000,
-            
-        },
-    ],
+    entries: [],
 }
 
 export const EntriesProvider:FC<PropsWithChildren> = ({ children }) => {
@@ -43,7 +21,7 @@ export const EntriesProvider:FC<PropsWithChildren> = ({ children }) => {
             _id: uuidv4(),
             description,
             createdAt: Date.now(),
-            status: 'pending'
+            status: 'pending',
         }
         dispatch({ type: '[Entry] Add-Entry', payload: newEntry });
     }
