@@ -18,7 +18,7 @@ export default function HomePage() {
         
         <Grid item xs={ 12 } sm={ 4 }>
           <Card sx={{ height: 'calc(100vh - 100px)'}}>
-            <CardHeader title='On Progress' />
+            <CardHeader title='In Progress' />
             <EntryList status='in-progress'/>
           </Card>
         </Grid>
