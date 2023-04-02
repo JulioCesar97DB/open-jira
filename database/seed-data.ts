@@ -12,19 +12,37 @@ interface seedEntry {
 export const seedData: SeedData = {
     entries: [
         {
-            description: 'Estudiar la documentacion de React',
+            description: 'Lorem ipsum dolor sit amet',
             status: 'pending',
             createdAt: Date.now(),
 
         },
         {
-            description: 'Curso de Next.js',
+            description: 'Consectetur adipiscing elit',
+            status: 'pending',
+            createdAt: Date.now(),
+
+        },
+        {
+            description: 'Sed do eiusmod tempor incididunt',
             status: 'in-progress',
             createdAt: Date.now() - 1000000,
 
         },
         {
-            description: 'Aprender HTML y CSS usando librerias como Bootstrap y tailwind',
+            description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+            status: 'in-progress',
+            createdAt: Date.now() - 1000000,
+
+        },
+        {
+            description: 'Excepteur sint occaecat ',
+            status: 'in-progress',
+            createdAt: Date.now() - 1000000,
+
+        },
+        {
+            description: 'Duis aute irure dolor in reprehenderit',
             status: 'finished',
             createdAt: Date.now() - 100000,
 

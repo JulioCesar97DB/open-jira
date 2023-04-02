@@ -20,6 +20,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         case 'GET':
             return getEntry(req, res);
 
+        case 'DELETE':
+            return deleteEntry(req, res);
+
         case 'PUT':
             return updateEntry(req, res);
 
@@ -44,6 +47,21 @@ const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     }
 }
 
+const deleteEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+
+    const { id } = req.query;
+
+    await db.connect();
+    const entryToDelete = await Entry.findByIdAndDelete(id);
+    await db.disconnect();
+
+    if (!entryToDelete) {
+        return res.status(400).json({ message: 'No hay entrada con ese ID: ' + id })
+    } else {
+        return res.status(200).json({ message: 'Successfully removed' });
+    }
+}
+
 const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     const { id } = req.query;
@@ -53,7 +71,7 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     const entryToUpdate = await Entry.findById(id);
     if (!entryToUpdate) {
         return res.status(400).json({ message: 'No hay entrada con ese ID: ' + id })
-    } 
+    }
 
     const {
         description = entryToUpdate.description,
