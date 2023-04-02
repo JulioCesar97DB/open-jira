@@ -3,10 +3,8 @@ import React, { DragEvent, FC, useContext } from 'react'
 import { Entry } from '../../interfaces';
 import { UIContext } from '../../context/ui';
 import { useRouter } from 'next/router';
-<<<<<<< HEAD
+
 import { dateFunctions } from '../../utils';
-=======
->>>>>>> 3540f0b1bcf68cfbf0511f50b42b4f52a08aa6e4
 
 interface Props {
     entry: Entry;
