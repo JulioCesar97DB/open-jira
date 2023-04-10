@@ -1,6 +1,8 @@
 import { ThemeProvider, styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 61,
@@ -49,13 +51,35 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-export default function CustomizedSwitches( ) {
+const CustomizedSwitches = () => {
+
+    const theme = Cookies.get('theme') || 'light'
+
+    const [currentTheme, setCurrentTheme] = useState(theme)
+
+    const themeHandler = () => {
+
+        if (currentTheme === 'dark') {
+            Cookies.set('theme', 'light')
+            setCurrentTheme('light')
+            console.log(currentTheme)
+        } else {
+            Cookies.set('theme', 'dark')
+            setCurrentTheme('dark')
+        }
+    }
 
     return (
         <FormControlLabel
-            control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked={ false }/>}
+            control={<MaterialUISwitch sx={{ m: 1 }}
+                value={theme}
+                onClick={themeHandler}
+                checked={theme === 'dark' ? true : false}
+            />}
             label="Theme"
-            
+
         />
     );
 }
+
+export default CustomizedSwitches;

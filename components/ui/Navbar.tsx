@@ -23,7 +23,8 @@ export const Navbar: FC = () => {
           <Typography variant='h6' sx={{ flexGrow: 1 }}>OpenJira</Typography>
         </Link>
 
-        <Typography variant='h6' sx={{ flexGrow: 1 }}></Typography>
+        <div style={{ flex: 1 }}/>
+        
         <CustomizedSwitches />
 
       </Toolbar>
